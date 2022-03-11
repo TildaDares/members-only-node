@@ -1,5 +1,6 @@
 var createError = require("http-errors");
 var express = require("express");
+var engine = require("ejs-locals");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var passport = require("passport");
@@ -22,6 +23,9 @@ var mongoDB = process.env.MONGODB_URI;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
+
+// use ejs-locals for all ejs templates:
+app.engine("ejs", engine);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
