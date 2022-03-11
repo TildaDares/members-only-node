@@ -4,15 +4,13 @@ var engine = require("ejs-locals");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var passport = require("passport");
-var LocalStrategy = require("passport-local");
-var bcrypt = require("bcryptjs");
+const session = require("express-session");
 var logger = require("morgan");
 var helmet = require("helmet");
 var compression = require("compression");
 require("dotenv").config();
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+var membersOnlyRouter = require("./routes/members-only");
 
 var app = express();
 
@@ -31,6 +29,18 @@ app.engine("ejs", engine);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+// Need to require the entire Passport config module so app.js knows about it
+require("./config/passport");
+
+app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(function (req, res, next) {
+  res.locals.currentUser = req.user;
+  next();
+});
+
 app.use(helmet());
 app.use(compression());
 app.use(logger("dev"));
@@ -39,8 +49,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/", membersOnlyRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
