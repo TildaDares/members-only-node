@@ -1,12 +1,14 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <p>kome</p>
-  </body>
-</html>
+<% layout('layout') -%>
+<p>hola</p>
+<% if(currentUser) { %>
+<p>You are signed in</p>
+<% } else {%>
+<p>You're not signed in</p>
+<% } %>
+<div>
+  <% messages.forEach((msg) => { %>
+  <p><%= msg.content %></p>
+  <p><%= msg.created_at_formatted %></p>
+  <p><%= msg.author.fullname %></p>
+  <% }) %>
+</div>
