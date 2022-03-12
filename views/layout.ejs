@@ -1,11 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Members Only | <%= title %></title>
+    <meta name="Members Only" content="An exclusive club for only members" />
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
-  <body>
-    <h1>Members Only</h1>
-    <main class="flex items-center justify-center w-full"><%- body -%></main>
+  <body class="bg-gray-900 text-white font-serif">
+    <nav class="bg-gray-800 shadow-xl p-3 flex justify-around">
+      <h1 class="text-2xl">Members Only</h1>
+      <div class="text-lg">
+        <% if(!currentUser) { %>
+        <a href="/login" class="pr-4 hover:text-blue-500">Login</a>
+        <a href="/sign-up" class="hover:text-blue-500">Sign Up</a>
+        <% } else { %>
+        <a class="pr-4" class="hover:text-blue-500">Become a full member</a>
+        <a href="/logout" class="hover:text-blue-500">Logout</a>
+        <% } %>
+      </div>
+    </nav>
+    <main class="flex items-center justify-center w-full mt-7">
+      <%- body -%>
+    </main>
   </body>
 </html>
