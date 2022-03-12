@@ -9,7 +9,7 @@
   </head>
   <body class="bg-gray-900 text-white font-serif">
     <nav class="bg-gray-800 shadow-xl p-3 flex justify-around">
-      <h1 class="text-2xl">Members Only</h1>
+      <a href="/" class="text-2xl">Members Only</a>
       <div class="text-lg">
         <% if(!currentUser) { %>
         <a href="/login" class="pr-4 hover:text-blue-500">Login</a>
@@ -20,7 +20,7 @@
         <% } %>
       </div>
     </nav>
-    <main class="flex items-center justify-center w-full mt-7">
+    <main class="flex items-center flex-column justify-center w-full mt-7">
       <%- body -%>
     </main>
   </body>

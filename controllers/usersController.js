@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
 exports.signUpGet = function (req, res, next) {
-  res.render("users/sign-up", { title: "Sign Up" });
+  res.render("users/authentication", { title: "Sign Up", action: "/sign-up" });
 };
 
 exports.signUpPost = function (req, res, next) {
@@ -23,7 +23,7 @@ exports.signUpPost = function (req, res, next) {
 };
 
 exports.loginGet = function (req, res, next) {
-  res.render("users/sign-in", { title: "Login" });
+  res.render("users/authentication", { title: "Sign In", action: "/login" });
 };
 
 exports.loginPost = passport.authenticate("local", {
