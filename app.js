@@ -4,7 +4,7 @@ var engine = require("ejs-locals");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var passport = require("passport");
-const session = require("express-session");
+var session = require("express-session");
 var logger = require("morgan");
 var helmet = require("helmet");
 var compression = require("compression");
@@ -32,7 +32,13 @@ app.set("view engine", "ejs");
 // Need to require the entire Passport config module so app.js knows about it
 require("./config/passport");
 
-app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 
