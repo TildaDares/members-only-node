@@ -10,7 +10,7 @@ exports.index = function (req, res, next) {
         next(error);
       }
 
-      res.render("index", { messages: results });
+      res.render("index", { messages: results, title: "Home" });
     });
 };
 
@@ -24,7 +24,7 @@ exports.new = [
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      res.render("new.ejs");
+      res.render("new.ejs", { title: "New Message" });
       return;
     }
 
