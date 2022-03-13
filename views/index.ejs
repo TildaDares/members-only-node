@@ -4,7 +4,8 @@
   <div class="px-6 py-4 bg-gray-800 mt-6 rounded-lg">
     <p class="text-white text-base"><%= msg.content %></p>
     <p class="text-gray-400 text-right mt-5">
-      - <%= currentUser ? msg.user.username : 'Anonymous'%>
+      - <%= currentUser && currentUser.membership_status == 'Elite' ?
+      msg.user.username : 'Anonymous'%>
     </p>
     <p class="text-gray-400 text-right"><%= msg.created_at_formatted %></p>
   </div>

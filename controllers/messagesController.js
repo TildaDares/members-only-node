@@ -4,6 +4,7 @@ const { body, validationResult } = require("express-validator");
 exports.index = function (req, res, next) {
   Message.find({})
     .populate("user")
+    .sort({ created_at: -1 })
     .exec(function (err, results) {
       if (err) {
         const error = new Error(err);
@@ -15,12 +16,7 @@ exports.index = function (req, res, next) {
 };
 
 exports.newGet = function (req, res, next) {
-  if (req.isAuthenticated())
-    res.render("messages/new", { title: "New Message" });
-  else {
-    req.flash("alert", "You need to be logged in to post a message!");
-    res.redirect("/");
-  }
+  res.render("messages/new", { title: "New Message" });
 };
 
 exports.newPost = [

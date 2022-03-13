@@ -2,6 +2,30 @@ const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
 const passport = require("passport");
+require("dotenv").config();
+
+exports.becomeFullMemberGet = function (req, res, next) {
+  res.render("users/full-member", { title: "Become a Full Member" });
+};
+
+exports.becomeFullMemberPost = function (req, res, next) {
+  if (req.body.code == process.env.REFERRAL_CODE) {
+    User.findByIdAndUpdate(
+      req.user._id,
+      { membership_status: "Elite" },
+      {},
+      function (err, results) {
+        if (err) return next(err);
+
+        req.flash("notice", "You are now a full member.");
+        res.redirect("/");
+      }
+    );
+  } else {
+    req.flash("alert", "Referral Code is invalid");
+    res.redirect("/full-member");
+  }
+};
 
 exports.signUpGet = function (req, res, next) {
   res.render("users/authentication", { title: "Sign Up", action: "/sign-up" });

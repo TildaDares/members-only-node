@@ -21,12 +21,18 @@
         <a href="/messages/new" class="hover:text-blue-500 pr-4"
           >Create message</a
         >
-        <a class="hover:text-blue-500 pr-4">Become a full member</a>
+        <% if(currentUser.membership_status == "Normal") { %>
+        <a href="/full-member" class="hover:text-blue-500 pr-4"
+          >Become a full member</a
+        >
+        <% } else { %>
+        <a href="/admin" class="hover:text-blue-500 pr-4">Become an admin</a>
+        <% } %>
         <a href="/logout" class="hover:text-blue-500 text-red-500">Logout</a>
         <% } %>
       </div>
     </nav>
-    <main class="flex items-center flex-col justify-center w-full mt-7">
+    <main class="flex items-center flex-col justify-center w-full mt-7 mb-5">
       <h1 class="text-2xl text-center pb-4"><%= title %></h1>
 
       <!-- Alerts -->
