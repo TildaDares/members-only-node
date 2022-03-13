@@ -1,14 +1,12 @@
 <% layout('layout') -%>
-<p>hola</p>
-<% if(currentUser) { %>
-<p>You are signed in</p>
-<% } else {%>
-<p>You're not signed in</p>
-<% } %>
-<div>
+<div class="max-w-md w-full overflow-hidden px-5">
   <% messages.forEach((msg) => { %>
-  <p><%= msg.content %></p>
-  <p><%= msg.created_at_formatted %></p>
-  <p><%= msg.author.fullname %></p>
+  <div class="px-6 py-4 bg-gray-800 mt-6 rounded-lg">
+    <p class="text-white text-base"><%= msg.content %></p>
+    <p class="text-gray-400 text-right mt-5">
+      - <%= currentUser ? msg.user.username : 'Anonymous'%>
+    </p>
+    <p class="text-gray-400 text-right"><%= msg.created_at_formatted %></p>
+  </div>
   <% }) %>
 </div>

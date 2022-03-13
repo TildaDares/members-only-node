@@ -14,17 +14,29 @@ exports.index = function (req, res, next) {
     });
 };
 
-exports.new = [
+exports.newGet = function (req, res, next) {
+  if (req.isAuthenticated())
+    res.render("messages/new", { title: "New Message" });
+  else {
+    req.flash("alert", "You need to be logged in to post a message!");
+    res.redirect("/");
+  }
+};
+
+exports.newPost = [
   body("content")
     .trim()
     .isLength({ min: 1, max: 360 })
     .escape()
-    .withMessage("Message content cannot be empty"),
+    .withMessage("Message cannot be empty"),
   (req, res, next) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      res.render("new.ejs", { title: "New Message" });
+      res.render("messages/new", {
+        title: "New Message",
+        errors: errors.array(),
+      });
       return;
     }
 

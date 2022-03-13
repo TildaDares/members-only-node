@@ -5,6 +5,8 @@ var usersController = require("../controllers/usersController");
 
 /* GET home page. */
 router.get("/", messagesController.index);
+router.get("/messages/new", messagesController.newGet);
+router.post("/messages/new", messagesController.newPost);
 
 /* Session routes */
 router.get("/sign-up", usersController.signUpGet);

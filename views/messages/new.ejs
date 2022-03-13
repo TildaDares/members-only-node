@@ -1,6 +1,39 @@
-<% layout('layout') -%>
-<h1>New Message</h1>
-<form>
-  <textarea name="content"></textarea>
-  <button type="submit">Post!</button>
-</form>
+<% layout('../layout') -%>
+<div class="w-full max-w-md p-5">
+  <!-- Errors -->
+  <% if (typeof errors !== 'undefined') { %>
+  <p class="text-red-500 text-sm">The following issues have to be corrected:</p>
+  <ul class="mb-5 list-disc pl-6 pt-3">
+    <% for (const err of errors) { %>
+    <li class="text-red-500 text-xs italic pb-2"><%= err.msg %></li>
+    <% } %>
+  </ul>
+  <% } %>
+
+  <form
+    class="bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4"
+    method="POST"
+    action="/messages/new"
+  >
+    <div class="mb-4">
+      <label class="block text-white text-sm font-bold mb-2" for="content">
+        Message
+      </label>
+      <textarea
+        class="resize-none shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="content"
+        placeholder="Enter message"
+        name="content"
+        required
+      ></textarea>
+    </div>
+    <div class="flex items-center justify-between mt-6">
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        type="submit"
+      >
+        Post!
+      </button>
+    </div>
+  </form>
+</div>
