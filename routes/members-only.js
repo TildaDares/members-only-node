@@ -7,6 +7,13 @@ var authorization = require("../middleware/authorization");
 /* GET home page. */
 router.get("/", messagesController.index);
 
+router.post(
+  "/message/:id/delete",
+  authorization.isAuthenticated,
+  authorization.isAdmin,
+  messagesController.delete
+);
+
 router.get(
   "/messages/new",
   authorization.isAuthenticated,

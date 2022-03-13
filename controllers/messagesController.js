@@ -51,3 +51,12 @@ exports.newPost = [
     });
   },
 ];
+
+exports.delete = function (req, res, next) {
+  Message.findByIdAndRemove(req.params.id, function (err) {
+    if (err) return next(err);
+
+    req.flash("notice", "Message has been deleted!");
+    res.redirect("/");
+  });
+};
