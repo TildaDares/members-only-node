@@ -14,6 +14,15 @@ exports.isFullMember = function (req, res, next) {
   }
 };
 
+exports.isAdminEligible = function (req, res, next) {
+  if (req.user.membership_status == "Normal") {
+    req.flash("alert", "Only full members can become admins");
+    res.redirect("/");
+  } else {
+    return next();
+  }
+};
+
 exports.isAdmin = function (req, res, next) {
   if (req.user.isAdmin) return next();
 

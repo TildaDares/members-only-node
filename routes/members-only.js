@@ -6,11 +6,13 @@ var authorization = require("../middleware/authorization");
 
 /* GET home page. */
 router.get("/", messagesController.index);
+
 router.get(
   "/messages/new",
   authorization.isAuthenticated,
   messagesController.newGet
 );
+
 router.post(
   "/messages/new",
   authorization.isAuthenticated,
@@ -23,11 +25,26 @@ router.get(
   authorization.isFullMember,
   usersController.becomeFullMemberGet
 );
+
 router.post(
   "/full-member",
   authorization.isAuthenticated,
   authorization.isFullMember,
   usersController.becomeFullMemberPost
+);
+
+router.get(
+  "/admin",
+  authorization.isAuthenticated,
+  authorization.isAdminEligible,
+  usersController.becomeAdminGet
+);
+
+router.post(
+  "/admin",
+  authorization.isAuthenticated,
+  authorization.isAdminEligible,
+  usersController.becomeAdminPost
 );
 
 /* Session routes */

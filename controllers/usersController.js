@@ -27,6 +27,29 @@ exports.becomeFullMemberPost = function (req, res, next) {
   }
 };
 
+exports.becomeAdminGet = function (req, res, next) {
+  res.render("users/admin", { title: "Become an Admin" });
+};
+
+exports.becomeAdminPost = function (req, res, next) {
+  if (req.body.admin_code == process.env.ADMIN_CODE) {
+    User.findByIdAndUpdate(
+      req.user._id,
+      { isAdmin: true },
+      {},
+      function (err, results) {
+        if (err) return next(err);
+
+        req.flash("notice", "You are now an admin.");
+        res.redirect("/");
+      }
+    );
+  } else {
+    req.flash("alert", "Admin Code is invalid");
+    res.redirect("/admin");
+  }
+};
+
 exports.signUpGet = function (req, res, next) {
   res.render("users/authentication", { title: "Sign Up", action: "/sign-up" });
 };

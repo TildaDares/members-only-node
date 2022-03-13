@@ -25,7 +25,8 @@
         <a href="/full-member" class="hover:text-blue-500 pr-4"
           >Become a full member</a
         >
-        <% } else { %>
+        <% } else if(currentUser.membership_status == "Elite" &&
+        !currentUser.isAdmin) { %>
         <a href="/admin" class="hover:text-blue-500 pr-4">Become an admin</a>
         <% } %>
         <a href="/logout" class="hover:text-blue-500 text-red-500">Logout</a>
