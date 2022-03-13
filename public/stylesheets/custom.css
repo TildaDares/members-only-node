@@ -1,0 +1,13 @@
+.alert {
+  animation: hideAnimation 0s ease-in 3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes hideAnimation {
+  to {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    padding: 0;
+  }
+}

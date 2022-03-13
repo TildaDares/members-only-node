@@ -3,6 +3,7 @@ var express = require("express");
 var engine = require("ejs-locals");
 var path = require("path");
 var cookieParser = require("cookie-parser");
+var flash = require("connect-flash");
 var passport = require("passport");
 var session = require("express-session");
 var logger = require("morgan");
@@ -15,8 +16,6 @@ var membersOnlyRouter = require("./routes/members-only");
 var app = express();
 
 var mongoose = require("mongoose");
-var dev_db_url =
-  "mongodb+srv://beautifulchaos:coolpassword@cluster0.fjbko.mongodb.net/members-only?retryWrites=true&w=majority";
 var mongoDB = process.env.MONGODB_URI;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;
@@ -39,11 +38,20 @@ app.use(
     saveUninitialized: true,
   })
 );
+// Connect flash
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(function (req, res, next) {
   res.locals.currentUser = req.user;
+  next();
+});
+
+// Global variables
+app.use(function (req, res, next) {
+  res.locals.notice = req.flash("notice");
+  res.locals.alert = req.flash("alert");
   next();
 });
 

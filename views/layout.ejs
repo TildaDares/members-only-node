@@ -6,6 +6,7 @@
     <title>Members Only | <%= title %></title>
     <meta name="Members Only" content="An exclusive club for only members" />
     <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/custom.css" />
   </head>
   <body class="bg-gray-900 text-white font-serif">
     <nav class="bg-gray-800 shadow-xl p-3 flex justify-around">
@@ -15,13 +16,32 @@
         <a href="/login" class="pr-4 hover:text-blue-500">Login</a>
         <a href="/sign-up" class="hover:text-blue-500">Sign Up</a>
         <% } else { %>
-        <a class="pr-4" class="hover:text-blue-500">Become a full member</a>
-        <a href="/logout" class="hover:text-blue-500">Logout</a>
+        <a class="hover:text-blue-500 pr-4">Become a full member</a>
+        <a href="/logout" class="hover:text-blue-500 text-red-500">Logout</a>
         <% } %>
       </div>
     </nav>
-    <main class="flex items-center flex-column justify-center w-full mt-7">
-      <%- body -%>
+    <main class="flex items-center flex-col justify-center w-full mt-7">
+      <h1 class="text-2xl text-center pb-4"><%= title %></h1>
+
+      <!-- Alerts -->
+      <% if(notice != '') { %>
+      <div
+        class="alert bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-3"
+        role="alert"
+      >
+        <strong class="font-bold">Successful!</strong>
+        <span class="block sm:inline"><%= notice %></span>
+      </div>
+      <% } %> <% if(alert != '') { %>
+      <div
+        class="alert bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-3"
+        role="alert"
+      >
+        <strong class="font-bold">Error!</strong>
+        <span class="block sm:inline"><%= alert %></span>
+      </div>
+      <% } %> <%- body -%>
     </main>
   </body>
 </html>
