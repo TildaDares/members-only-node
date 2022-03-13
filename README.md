@@ -22,6 +22,7 @@ Users can:
 - Only admins can delete messages
 
 Secret passcode to become a full member: `twilight`
+
 Secret passcode to become an admin: `harrypotter`
 
 ## How to run this app locally
