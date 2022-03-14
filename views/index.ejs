@@ -4,8 +4,9 @@
   <div class="px-6 py-4 bg-gray-800 mt-6 rounded-lg">
     <p class="text-white text-base break-words"><%= msg.content %></p>
     <p class="text-gray-400 text-right mt-5">
-      - <%= currentUser && currentUser.membership_status == 'Elite' ?
-      msg.user.username : 'Anonymous'%>
+      - <% if(currentUser && (currentUser.membership_status == 'Elite' ||
+      currentUser.username == msg.user.username)) { %> <%= msg.user.username %>
+      <% } else {%> Anonymous <% } %>
     </p>
     <p class="text-gray-400 text-right"><%= msg.created_at_formatted %></p>
 
