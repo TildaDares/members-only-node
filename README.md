@@ -1,6 +1,6 @@
 # Members-Only
 
-Members Only is an exclusive clubhouse where members can write anonymous posts. Inside the clubhouse, full members can see who the author of a post is, but outside they can only see the post.
+Members Only is an exclusive clubhouse where members can write anonymous posts. Inside the clubhouse, full members can see who the author of a post is, but outside they can only see the post. PassportJS-local was used for authentication.
 
 ### Home Page:
 
@@ -32,4 +32,4 @@ Secret passcode to become an admin: `harrypotter`
 - Run `npm install` to install dependencies
 - Run `npm run devstart` to view site in https:localhost:3000
 
-[Live Site]()
+[Live Site](https://odin-members-only-node.herokuapp.com/)
