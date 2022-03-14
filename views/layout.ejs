@@ -32,8 +32,8 @@
         <a href="/logout" class="hover:text-blue-500 text-red-500">Logout</a>
         <% } %>
       </div>
+      <% if(currentUser) { %>
       <div class="inline-flex">
-        <% if(currentUser) { %>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -52,8 +52,8 @@
         <span class="pl-2 font-bold text-blue-400"
           ><%= currentUser.username %></span
         >
-        <% } %>
       </div>
+      <% } %>
     </nav>
     <main class="flex items-center flex-col justify-center w-full mt-7 mb-5">
       <h1 class="text-2xl text-center pb-4"><%= title %></h1>
