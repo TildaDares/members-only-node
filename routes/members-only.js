@@ -55,10 +55,26 @@ router.post(
 );
 
 /* Session routes */
-router.get("/sign-up", usersController.signUpGet);
-router.post("/sign-up", usersController.signUpPost);
-router.post("/login", usersController.loginPost);
-router.get("/login", usersController.loginGet);
-router.get("/logout", usersController.logout);
+router.get(
+  "/sign-up",
+  authorization.isNotAuthenticated,
+  usersController.signUpGet
+);
+router.post(
+  "/sign-up",
+  authorization.isNotAuthenticated,
+  usersController.signUpPost
+);
+router.post(
+  "/login",
+  authorization.isNotAuthenticated,
+  usersController.loginPost
+);
+router.get(
+  "/login",
+  authorization.isNotAuthenticated,
+  usersController.loginGet
+);
+router.get("/logout", authorization.isAuthenticated, usersController.logout);
 
 module.exports = router;

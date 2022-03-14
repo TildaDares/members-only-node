@@ -5,6 +5,13 @@ exports.isAuthenticated = function (req, res, next) {
   res.redirect("/");
 };
 
+exports.isNotAuthenticated = function (req, res, next) {
+  if (!req.isAuthenticated()) return next();
+
+  req.flash("alert", "You are already logged in!");
+  res.redirect("/");
+};
+
 exports.isFullMember = function (req, res, next) {
   if (req.user.membership_status == "Elite") {
     req.flash("notice", "You are already a full member");
